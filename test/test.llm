@@ -1,6 +1,8 @@
 i: int = 0;
 while i < 10 {
-    (p "this is a test" + i + " wow!")
+    (p 
+        "this is a test wow!"
+    )
     i++;
 }
 

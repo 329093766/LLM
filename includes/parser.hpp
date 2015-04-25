@@ -14,6 +14,7 @@ private:
 
 public:
     int pos;
+    int streamSize;
     File *file;
 
     Parser() {
@@ -32,6 +33,9 @@ public:
     FuncDecl *parseFuncDecl();
     Decl *parseDecl();
     Node *parseNode();
+    ElementLiteral *parseElementLiteral();
+    ElementDecl *parseElementDecl();
+    HTML *parseHTML();
 
     Token *consumeToken();
     Token *peek(int ahead = 0);

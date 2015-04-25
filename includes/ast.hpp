@@ -1,7 +1,13 @@
 #ifndef __AST_HPP
 #define __AST_HPP
 
-class Node {};
+#include <iostream>
+#include <vector>
+
+class Node {
+public:
+    virtual void codegen() = 0;    
+};
 
 enum PrimitiveType {
     TYPE_INT,
@@ -19,16 +25,66 @@ public:
     }
 };
 
+class HTML : public Node {
+public:
+    HTML() {}
+    virtual ~HTML() {}
+    virtual void codegen() = 0;    
+};
+
+enum ElementLiteralType {
+    LIT_NUMBER,
+    LIT_STRING,
+    LIT_CHAR,
+    LIT_UNKNOWN,
+}; 
+
+class ElementLiteral : public HTML {
+public:
+    ElementLiteralType type;
+    std::string content;
+
+    ElementLiteral(ElementLiteralType type, std::string content) {
+        this->type = type;
+        this->content = content;
+    }
+
+    virtual void codegen();
+};
+
+class ElementDecl : public HTML {
+public:
+    std::string tag;
+    std::vector<HTML*> *children; 
+
+    ElementDecl(std::string tag) {
+        this->tag = tag;
+        this->children = new std::vector<HTML*>;
+    }
+
+    void appendChild(HTML *child) {
+        this->children->push_back(child);
+    }
+
+    virtual ~ElementDecl() {
+        this->children->clear();
+    }
+
+    virtual void codegen();    
+};
+
 class Decl : public Node {
 public:
     Decl() {}
     virtual ~Decl() {}
+    virtual void codegen() = 0;    
 };
 
 class Expr {
 public:
     Expr() {}
     virtual ~Expr();
+    virtual void codegen() = 0;    
 };
 
 class VarDecl : public Decl {
@@ -43,6 +99,8 @@ public:
     }
 
     virtual ~VarDecl() { }
+
+    virtual void codegen();
 };
 
 class FuncParam {
@@ -56,6 +114,7 @@ public:
     }
 
     virtual ~FuncParam() {}
+    virtual void codegen();
 };
 
 class FuncDecl : public Decl {
@@ -69,6 +128,7 @@ public:
     }
 
     virtual ~FuncDecl() {}
+    virtual void codegen();
 };
 
 #endif // __AST_HPP

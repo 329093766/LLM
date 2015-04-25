@@ -7,4 +7,4 @@ all:
 	${CXX} ${CXX_FLAGS} ${SRC_FILES} -o bin/llm
 
 spawn:
-	spawn-fcgi -p 8000 -n bin/llm
+	spawn-fcgi -p 8000 -n bin/llm test/echo.llm
