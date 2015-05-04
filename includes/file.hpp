@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "errorhandler.hpp"
+#include "logger.hpp"
 
 class File {
 private:

@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
 
-#include "errorhandler.hpp"
+#include "logger.hpp"
 #include "file.hpp"
-#include "fcgio.h"
+#include "writer.hpp"
 
 bool isArgument(std::string argument) {
 	return argument[0] == '-';
@@ -16,6 +16,8 @@ void handleArgument(std::string argument) {
 
 
 int main(int argc, char** argv) {
+	Writer writer;
+
 	// no arguments, what a noob
 	if (argc <= 1) {
 		Logger(LOGGER_ERROR) << "no input files";
@@ -36,40 +38,12 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	std::streambuf *cin_streambuf  = std::cin.rdbuf();
-    std::streambuf *cout_streambuf = std::cout.rdbuf();
-    std::streambuf *cerr_streambuf = std::cerr.rdbuf();
-
-    FCGX_Request request;
-
-    FCGX_Init();
-    FCGX_InitRequest(&request, 0, 0);
-
-    while (FCGX_Accept_r(&request) == 0) {
-        fcgi_streambuf cin_fcgi_streambuf(request.in);
-        fcgi_streambuf cout_fcgi_streambuf(request.out);
-        fcgi_streambuf cerr_fcgi_streambuf(request.err);
-
-        std::cin.rdbuf(&cin_fcgi_streambuf);
-        std::cout.rdbuf(&cout_fcgi_streambuf);
-        std::cerr.rdbuf(&cerr_fcgi_streambuf);
-
-        std::cout << "Content-type: text/html\r\n"
-                << "\r\n"
-                << "<html>\n"
-                << "  <head>\n"
-                << "    <title>Hello, World!</title>\n"
-                << "  </head>\n"
-                << "  <body>\n"
-                << "    <h1>Praise the lord, it works!!</h1>\n"
-                << "  </body>\n"
-                << "</html>\n";
-    }
-
-    // restore stdio streambufs
-    std::cin.rdbuf(cin_streambuf);
-    std::cout.rdbuf(cout_streambuf);
-    std::cerr.rdbuf(cerr_streambuf);
+	writer.saveBuffers();
+	for (int i = 0; i < 10; i++) {
+		HeaderElement header(1);
+		writer.writeElement(header);
+	}
+	writer.writeDocument();
 
 	return 0;
 }
