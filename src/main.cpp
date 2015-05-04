@@ -40,7 +40,8 @@ int main(int argc, char** argv) {
 
 	writer.saveBuffers();
 	for (int i = 0; i < 10; i++) {
-		HeaderElement header(1);
+		Text val("Ian is a faggot " + std::to_string(i));
+		HeaderElement header(1, val);
 		writer.writeElement(header);
 	}
 	writer.writeDocument();

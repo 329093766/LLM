@@ -1,6 +1,8 @@
 #ifndef __WRITER_H
 #define __WRITER_H
 
+#include <vector>
+
 #include "fcgio.h"
 #include "logger.hpp"
 
@@ -11,17 +13,43 @@ public:
 	}
 };
 
-class HeaderElement : public Element {
+class Text : public Element {
 private:
-	int level;
+	std::string value;
 
 public:
-	HeaderElement(int level) {
-		this->level = level;
+	Text(std::string value) {
+		this->value = value;
 	}
 
 	std::string emitElement() {
-		return "<h1>test</h1>";
+		return this->value;
+	}
+};
+
+class HeaderElement : public Element {
+private:
+	int level;
+	std::vector<Element*> elements;
+
+public:
+	HeaderElement(int level, std::vector<Element*> elements) {
+		this->level = level;
+		this->elements = elements;
+	}
+
+	HeaderElement(int level, Text text) {
+		this->level = level;
+		this->elements.push_back(&text);
+	}
+
+	std::string emitElement() {
+		std::string result = "<h1>";
+		for (Element *e : this->elements) {
+			result += e->emitElement();
+		}
+		result += "</h1>";
+		return result;
 	}
 };
 

@@ -22,6 +22,8 @@ void Writer::writeDocument() {
 
         std::cout << document;
     }
+
+    std::cout << document << std::endl;
 }
 
 void Writer::writeElement(Element &element) {

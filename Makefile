@@ -1,5 +1,5 @@
 SRC_FILES = $(wildcard src/*.cpp)
-CXX_FLAGS = -Iincludes/ -Wall -g -lfcgi++ -lfcgi
+CXX_FLAGS = -Iincludes/ -Wall -g -std=c++11 -lfcgi++ -lfcgi
 CXX = clang++
 
 all:
