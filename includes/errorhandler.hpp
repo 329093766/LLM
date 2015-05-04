@@ -5,6 +5,7 @@
 
 #define LOGGER_ERROR 0
 #define LOGGER_WARNING 1
+#define LOGGER_INFO 2
 
 class Logger {
 private:
@@ -17,6 +18,7 @@ public:
     	switch (this->level) {
     		case LOGGER_ERROR: return "error";
     		case LOGGER_WARNING: return "warning";
+    		case LOGGER_INFO: return "info";
     	}
     	return "";
     }
