@@ -5,6 +5,7 @@ class Lexer {
 private:
 
 public:
-}
+	Lexer();
+};
 
 #endif // __LEXER_H
