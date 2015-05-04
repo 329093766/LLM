@@ -41,9 +41,13 @@ int main(int argc, char** argv) {
 	writer.saveBuffers();
 	srand(time(0));
 	for (int i = 0; i < 10; i++) {
-		Text val("Ian is a faggot " + std::to_string(i));
-		HeaderElement header((rand() % 6 + 1), val);
+		Text headerText("Ian is a faggot " + std::to_string(i));
+		HeaderElement header((rand() % 6 + 1), headerText);
 		writer.writeElement(header);
+
+		Text paraText("This is a paragraph");
+		ParagraphElement para(paraText);
+		writer.writeElement(para);
 	}
 	writer.writeDocument();
 

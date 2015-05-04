@@ -53,6 +53,29 @@ public:
 	}
 };
 
+class ParagraphElement : public Element {
+private:
+	std::vector<Element*> elements;
+
+public:
+	ParagraphElement(std::vector<Element*> elements) {
+		this->elements = elements;
+	}
+
+	ParagraphElement(Text text) {
+		this->elements.push_back(&text);
+	}
+
+	std::string emitElement() {
+		std::string result = "<p>";
+		for (Element *e : this->elements) {
+			result += e->emitElement();
+		}
+		result += "</p>";
+		return result;
+	}
+};
+
 class Writer {
 private:
 	std::streambuf *cin_streambuf;
