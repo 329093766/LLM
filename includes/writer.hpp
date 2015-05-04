@@ -44,11 +44,11 @@ public:
 	}
 
 	std::string emitElement() {
-		std::string result = "<h1>";
+		std::string result = "<h" + std::to_string(level) + ">";
 		for (Element *e : this->elements) {
 			result += e->emitElement();
 		}
-		result += "</h1>";
+		result += "</h" + std::to_string(level) + ">";
 		return result;
 	}
 };

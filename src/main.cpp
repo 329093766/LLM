@@ -39,9 +39,10 @@ int main(int argc, char** argv) {
 	}
 
 	writer.saveBuffers();
+	srand(time(0));
 	for (int i = 0; i < 10; i++) {
 		Text val("Ian is a faggot " + std::to_string(i));
-		HeaderElement header(1, val);
+		HeaderElement header((rand() % 6 + 1), val);
 		writer.writeElement(header);
 	}
 	writer.writeDocument();
