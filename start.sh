@@ -1,1 +1,1 @@
-spawn-fcgi -p 9000 -n bin/llm
+spawn-fcgi -p 9000 -n bin/llm test/test.llm

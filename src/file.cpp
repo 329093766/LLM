@@ -7,6 +7,7 @@ File::File(std::string location) {
 	std::ifstream file(location.c_str());
 	if (!file) {
 		Logger(LOGGER_ERROR) << "could not open file";
+		return;
 	}
 
 	std::string line;
