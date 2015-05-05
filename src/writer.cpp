@@ -26,8 +26,8 @@ void Writer::writeDocument() {
     std::cout << document << std::endl;
 }
 
-void Writer::writeElement(Element &element) {
-	document += element.emitElement();
+void Writer::writeElement(Element *element) {
+	document += element->emitElement();
 }
 
 void Writer::saveBuffers() {
