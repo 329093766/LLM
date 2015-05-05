@@ -42,6 +42,9 @@ int main(int argc, char** argv) {
 
 	Text headerText("My first heading!");
 	HeaderElement header(1, &headerText);
+
+	Attribute attrib("style", "color: red");
+	header.addAttribute(&attrib);
 	writer.writeElement(&header);
 
 	Text paraText("This is a paragraph.");

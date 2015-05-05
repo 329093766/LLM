@@ -34,6 +34,30 @@ protected:
 	std::vector<Element*> elements;
 	std::vector<Attribute*> attributes;
 
+	std::string emitElements() {
+		std::string result;
+		for (Element *e : elements) {
+			result += e->emitElement();
+		}
+		return result;
+	}
+
+	std::string emitAttributes() {
+		std::string result = attributes.size() > 0 ? " " : "";
+
+		int count = 0;
+		for (Attribute *a : attributes) {
+			result += a->emitAttribute();
+			if (count > 1 && count != attributes.size() - 1) {
+				result += " ";
+			}
+			count++;
+		}
+		
+		return result;
+	}
+
+public:
 	void addAttribute(Attribute *attribute) {
 		attributes.push_back(attribute);
 	}
@@ -58,23 +82,6 @@ protected:
 		this->elements.insert(this->elements.end(), elements.begin(), elements.end());
 	}
 
-	std::string emitElements() {
-		std::string result;
-		for (Element *e : elements) {
-			result += e->emitElement();
-		}
-		return result;
-	}
-
-	std::string emitAttributes() {
-		std::string result;
-		for (Attribute *a : attributes) {
-			result += a->emitAttribute();
-		}
-		return result;
-	}
-
-public:
 	virtual std::string emitElement() {
 		return "vagina";
 	}
@@ -114,7 +121,7 @@ public:
 	}
 
 	std::string emitElement() {
-		std::string result = "<h" + std::to_string(level) + ">";
+		std::string result = "<h" + std::to_string(level) + emitAttributes() + ">";
 		result += emitElements();
 		result += "</h" + std::to_string(level) + ">";
 		return result;
