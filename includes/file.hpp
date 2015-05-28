@@ -4,8 +4,47 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "logger.hpp"
+
+class File;
+
+enum TokenType {
+    STRING,
+    NUMBER,
+    IDENTIFIER,
+    OPERATOR,
+    SEPARATOR,
+};
+
+static const std::string TokenTypeString[] = {
+    "STRING",
+    "NUMBER",
+    "IDENTIFIER",
+    "OPERATOR",
+    "SEPARATOR",
+};
+
+class Token {
+private:
+    File *file;
+    std::string content;
+    TokenType type;
+
+public:
+    Token(File *file, std::string, TokenType type) {
+        this->file = file;
+        this->content = content;
+        this->type = type;
+    }
+
+    File *getFile();
+    std::string getContent();
+    std::string toString();
+    std::string getTokenTypeToString();
+    TokenType getType();
+};
 
 class File {
 private:
@@ -17,16 +56,20 @@ private:
 	
 	/** the files contents */
 	std::string contents;
-	
+
+	/** token stream for file */
+    std::vector<Token> tokenStream;
+
 	/** how long the file is */
 	int fileLength;
 
 public:
 	File(std::string location);
 
-	int getFileLength() {
-		return this->fileLength;
-	}
+	std::string getName();
+	std::string getContent();
+	std::vector<Token> getTokenStream();
+	int getFileLength();
 
 };
 

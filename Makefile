@@ -5,3 +5,6 @@ CXX = clang++
 all:
 	@mkdir -p bin/
 	${CXX} ${CXX_FLAGS} ${SRC_FILES} -o bin/llm
+
+spawn:
+	spawn-fcgi -p 8000 -n bin/llm

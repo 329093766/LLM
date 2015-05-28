@@ -4,6 +4,7 @@
 #include "logger.hpp"
 #include "file.hpp"
 #include "writer.hpp"
+#include "lexer.hpp"
 
 bool isArgument(std::string argument) {
 	return argument[0] == '-';
@@ -13,7 +14,6 @@ void handleArgument(std::string argument) {
 	// cut the tack
 	argument = argument.substr(1);
 }
-
 
 int main(int argc, char** argv) {
 	Writer writer;
@@ -38,8 +38,18 @@ int main(int argc, char** argv) {
 		}
 	}
 
+	Lexer lexer;
+	lexer.startLexingFiles(files);
+
+	return 0;
+}
+
+
+/**
+
 	writer.saveBuffers();
 
+	// test...
 	Text headerText("My first heading!");
 	HeaderElement header(1, &headerText);
 
@@ -51,7 +61,7 @@ int main(int argc, char** argv) {
 	ParagraphElement para(&paraText);
 	writer.writeElement(&para);
 
+	// write the document
 	writer.writeDocument();
 
-	return 0;
-}
+ */

@@ -1,5 +1,25 @@
 #include "file.hpp"
 
+File *Token::getFile() {
+    return this->file;
+}
+
+std::string Token::getContent() {
+    return this->content;
+}
+
+std::string Token::toString() {
+	return "[" + getTokenTypeToString() + "], [" + this->content + "]";
+}
+
+std::string Token::getTokenTypeToString() {
+	return TokenTypeString[this->type];
+}
+
+TokenType Token::getType() {
+    return this->type;
+}
+
 File::File(std::string location) {
 	this->location = location;
 	
@@ -14,5 +34,22 @@ File::File(std::string location) {
 	while (std::getline(file, line)) {
 		this->contents = this->contents + line + "\n";
 	}
-	std::cout << contents << std::endl;
+
+	this->fileLength = this->contents.length();
+}
+
+std::string File::getName() {
+	return this->name;
+}
+
+std::string File::getContent() {
+	return this->contents;
+}
+
+std::vector<Token> File::getTokenStream() {
+	return this->tokenStream;
+}
+
+int File::getFileLength() {
+	return this->fileLength;
 }
