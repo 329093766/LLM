@@ -27,24 +27,23 @@ char Lexer::consumeCharacter() {
 
 std::string Lexer::flushBuffer() {
     std::string result = buffer;
-    std::cout << "flushed to " << result << std::endl;
     buffer = "";
     return result;
 }
 
 void Lexer::recognizeOperator() {
     consumeCharacter();
-    file->getTokenStream().push_back(Token(this->file, flushBuffer(), TokenType::OPERATOR));
+    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::OPERATOR));
 }
 
 void Lexer::recognizeSeparator() {
     consumeCharacter();
-    file->getTokenStream().push_back(Token(this->file, flushBuffer(), TokenType::SEPARATOR));
+    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::SEPARATOR));
 }
 
 void Lexer::recognizeNumber() {
     consumeCharacter();
-    file->getTokenStream().push_back(Token(this->file, flushBuffer(), TokenType::NUMBER));
+    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::NUMBER));
 }
 
 void Lexer::recognizeIdentifier() {
@@ -56,7 +55,7 @@ void Lexer::recognizeIdentifier() {
         consumeCharacter();
     }
 
-    file->getTokenStream().push_back(Token(this->file, flushBuffer(), TokenType::IDENTIFIER));
+    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::IDENTIFIER));
 }
 
 void Lexer::getNextToken() {
@@ -118,8 +117,8 @@ void Lexer::startLexingFiles(std::vector<File> files) {
         this->file = &file;
         lexFile(this->file);
 
-        for (auto &tokens: this->file->getTokenStream()) {
-            std::cout << tokens.toString() << std::endl;
+        for (auto &tokens: *this->file->getTokenStream()) {
+            std::cout << tokens->toString() << std::endl;
         }
     }
 }

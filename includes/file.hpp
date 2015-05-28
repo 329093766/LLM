@@ -33,7 +33,7 @@ private:
     TokenType type;
 
 public:
-    Token(File *file, std::string, TokenType type) {
+    Token(File *file, std::string content, TokenType type) {
         this->file = file;
         this->content = content;
         this->type = type;
@@ -44,6 +44,8 @@ public:
     std::string toString();
     std::string getTokenTypeToString();
     TokenType getType();
+
+    virtual ~Token() {}
 };
 
 class File {
@@ -58,7 +60,7 @@ private:
 	std::string contents;
 
 	/** token stream for file */
-    std::vector<Token> tokenStream;
+    std::vector<Token*> *tokenStream;
 
 	/** how long the file is */
 	int fileLength;
@@ -68,9 +70,16 @@ public:
 
 	std::string getName();
 	std::string getContent();
-	std::vector<Token> getTokenStream();
+	std::vector<Token*> *getTokenStream();
 	int getFileLength();
 
+    virtual ~File() {
+        // c++ is retarded
+        for (int i = 0; i < tokenStream->size(); i++) {
+            delete (*tokenStream)[i];
+        }
+        tokenStream->clear();
+    }
 };
 
 #endif // __FILE_H

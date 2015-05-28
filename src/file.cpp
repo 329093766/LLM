@@ -36,6 +36,7 @@ File::File(std::string location) {
 	}
 
 	this->fileLength = this->contents.length();
+	this->tokenStream = new std::vector<Token*>;
 }
 
 std::string File::getName() {
@@ -46,7 +47,7 @@ std::string File::getContent() {
 	return this->contents;
 }
 
-std::vector<Token> File::getTokenStream() {
+std::vector<Token*> *File::getTokenStream() {
 	return this->tokenStream;
 }
 
