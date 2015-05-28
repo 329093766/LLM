@@ -42,7 +42,15 @@ void Lexer::recognizeSeparator() {
 }
 
 void Lexer::recognizeNumber() {
-    consumeCharacter();
+    while (this->currentChar >= '0' && this->currentChar <= '9') {
+        consumeCharacter();
+    }
+    if (this->currentChar == '.') {
+        consumeCharacter();
+    }
+    while (this->currentChar >= '0' && this->currentChar <= '9') {
+        consumeCharacter();
+    }
     file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::NUMBER));
 }
 
