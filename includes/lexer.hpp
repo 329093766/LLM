@@ -34,12 +34,10 @@ public:
     void recognizeCharacter();
     void recognizeString();
     void lexFile(File *file);
-    void startLexingFiles(std::vector<File> files);
+    void startLexingFiles(std::vector<File> *files);
     void pushToken(TokenType type);
 
-    virtual ~Lexer() {
-
-    }
+    virtual ~Lexer() {}
 };
 
 #endif // __LEXER_H

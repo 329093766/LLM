@@ -5,6 +5,7 @@
 #include "file.hpp"
 #include "writer.hpp"
 #include "lexer.hpp"
+#include "parser.hpp"
 
 bool isArgument(std::string argument) {
 	return argument[0] == '-';
@@ -23,7 +24,7 @@ int main(int argc, char** argv) {
 		Logger(LOGGER_ERROR) << "no input files";
 	}
 
-	std::vector<File> files;
+	std::vector<File> *files = new std::vector<File>;
 
 	// loop through all arguments except
 	// for the executable
@@ -34,19 +35,20 @@ int main(int argc, char** argv) {
 		else {
 			// it's a file?
 			File file(argv[i]);
-			files.push_back(file);
+			files->push_back(file);
 		}
 	}
 
 	Lexer lexer;
 	lexer.startLexingFiles(files);
 
-	return 0;
-}
+	Parser parser;
+	parser.startParsingFiles(files);
 
+	files->clear();
 
-/**
-
+	/**
+	// output some html to CGI thing
 	writer.saveBuffers();
 
 	// test...
@@ -63,5 +65,7 @@ int main(int argc, char** argv) {
 
 	// write the document
 	writer.writeDocument();
+	*/
 
- */
+	return 0;
+}

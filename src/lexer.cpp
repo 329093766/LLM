@@ -148,13 +148,9 @@ void Lexer::lexFile(File *file) {
     }
 }
 
-void Lexer::startLexingFiles(std::vector<File> files) {
-    for (auto &file: files) {
+void Lexer::startLexingFiles(std::vector<File> *files) {
+    for (auto &file: *files) {
         this->file = &file;
         lexFile(this->file);
-
-        for (auto &tokens: *this->file->tokenStream) {
-            std::cout << tokens->toString() << std::endl;
-        }
     }
 }

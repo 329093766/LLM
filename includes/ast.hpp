@@ -3,25 +3,39 @@
 
 class Node {};
 
+enum Type {
+    TYPE_INT,
+    TYPE_DOUBLE,
+    TYPE_STRING,
+    TYPE_CHAR,
+};
+
+class Decl : Node {
+private:
+public:
+};
+
 class Expr {
 public:
     virtual ~Expr();
 };
 
-class Type {
-public:
-    std::string type;
+class FunctionParameter {
+    std::string name;
+    Type type;
 };
 
-class FunctionParameter : Node {
-
-};
-
-class FunctionDecl : Node {
+class FunctionDecl : Decl {
 public:
     std::string name;
+    std::vector<FunctionParameter> params;
 
-    FunctionDecl();
+    FunctionDecl(std::string name, std::vector<FunctionParameter> params) {
+        this->name = name;
+        this->params = params;
+    }
+
+    virtual ~FunctionDecl() {}
 };
 
 #endif // __AST_HPP
