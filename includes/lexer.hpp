@@ -19,7 +19,9 @@ private:
     bool running;
 
 public:
-	Lexer();
+	Lexer() {
+
+    }
 
     std::string flushBuffer();
     char consumeCharacter();
@@ -29,8 +31,15 @@ public:
     void recognizeIdentifier();
     void getNextToken();
     void skipCharacter();
+    void recognizeCharacter();
+    void recognizeString();
     void lexFile(File *file);
     void startLexingFiles(std::vector<File> files);
+    void pushToken(TokenType type);
+
+    virtual ~Lexer() {
+
+    }
 };
 
 #endif // __LEXER_H

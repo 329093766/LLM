@@ -1,5 +1,15 @@
-for int i = 0; i < 10; i++ {
-    <p>
-        This is a test, I hope you like it!
-    </p>
+fn add(a: int, b: int) -> int {
+    return a + b;
 }
+
+i: int = 0;
+while i < 10 {
+    (p "this is a test" + i + " wow!")
+    i++;
+}
+
+(div (
+    (p "hi mum")
+))
+
+(p i)

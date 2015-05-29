@@ -16,6 +16,7 @@ enum TokenType {
     IDENTIFIER,
     OPERATOR,
     SEPARATOR,
+    CHARACTER
 };
 
 static const std::string TokenTypeString[] = {
@@ -24,32 +25,29 @@ static const std::string TokenTypeString[] = {
     "IDENTIFIER",
     "OPERATOR",
     "SEPARATOR",
+    "CHARACTER"
 };
 
 class Token {
-private:
+public:
     File *file;
     std::string content;
     TokenType type;
 
-public:
     Token(File *file, std::string content, TokenType type) {
         this->file = file;
         this->content = content;
         this->type = type;
     }
 
-    File *getFile();
-    std::string getContent();
     std::string toString();
     std::string getTokenTypeToString();
-    TokenType getType();
 
     virtual ~Token() {}
 };
 
 class File {
-private:
+public:
 	/** the files location */
 	std::string location;
 	
@@ -65,13 +63,7 @@ private:
 	/** how long the file is */
 	int fileLength;
 
-public:
 	File(std::string location);
-
-	std::string getName();
-	std::string getContent();
-	std::vector<Token*> *getTokenStream();
-	int getFileLength();
 
     virtual ~File() {
         // c++ is retarded

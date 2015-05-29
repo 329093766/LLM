@@ -1,9 +1,5 @@
 #include "lexer.hpp"
 
-Lexer::Lexer() {
-
-}
-
 char Lexer::consumeCharacter() {
     if (this->pos > this->inputLength) {
         this->running = false;
@@ -19,7 +15,7 @@ char Lexer::consumeCharacter() {
         this->charNumber = 0;
     }
 
-    this->currentChar = this->file->getContent()[++this->pos];
+    this->currentChar = this->file->contents[++this->pos];
     this->charNumber++;
 
     return result;
@@ -31,14 +27,40 @@ std::string Lexer::flushBuffer() {
     return result;
 }
 
+void Lexer::pushToken(TokenType type) {
+    file->tokenStream->push_back(new Token(this->file, flushBuffer(), type));
+}
+
 void Lexer::recognizeOperator() {
     consumeCharacter();
-    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::OPERATOR));
+    pushToken(TokenType::OPERATOR);
 }
 
 void Lexer::recognizeSeparator() {
     consumeCharacter();
-    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::SEPARATOR));
+    pushToken(TokenType::SEPARATOR);
+}
+
+void Lexer::recognizeCharacter() {
+    consumeCharacter();
+
+    while (this->currentChar != '\'') {
+        consumeCharacter();
+    }
+
+    consumeCharacter();
+    pushToken(TokenType::CHARACTER);
+}
+
+void Lexer::recognizeString() {
+    consumeCharacter();
+
+    while (this->currentChar != '"') {
+        consumeCharacter();
+    }
+
+    consumeCharacter();
+    pushToken(TokenType::STRING);
 }
 
 void Lexer::recognizeNumber() {
@@ -51,7 +73,7 @@ void Lexer::recognizeNumber() {
     while (this->currentChar >= '0' && this->currentChar <= '9') {
         consumeCharacter();
     }
-    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::NUMBER));
+    pushToken(TokenType::NUMBER);
 }
 
 void Lexer::recognizeIdentifier() {
@@ -63,7 +85,7 @@ void Lexer::recognizeIdentifier() {
         consumeCharacter();
     }
 
-    file->getTokenStream()->push_back(new Token(this->file, flushBuffer(), TokenType::IDENTIFIER));
+    pushToken(TokenType::IDENTIFIER);
 }
 
 void Lexer::getNextToken() {
@@ -87,6 +109,12 @@ void Lexer::getNextToken() {
         case '.': case '&':
             recognizeOperator();
             break;
+        case '\'':
+            recognizeCharacter();
+            break;
+        case '"':
+            recognizeString();
+            break;
         case '[': case ']':
         case '(': case ')':
         case '{': case '}':
@@ -99,7 +127,7 @@ void Lexer::getNextToken() {
             break;
         case ' ': case '\t': case '\n': case '\r':
             this->pos++;
-            this->currentChar = this->file->getContent()[this->pos];
+            this->currentChar = this->file->contents[this->pos];
             break;
         default:
             std::cout << "WHAT YEAR IS IT (" << this->currentChar << ")" << std::endl;
@@ -111,9 +139,9 @@ void Lexer::lexFile(File *file) {
     this->pos = 0;
     this->lineNumber = 1;
     this->charNumber = 1;
-    this->currentChar = this->file->getContent()[this->pos];
+    this->currentChar = this->file->contents[this->pos];
     this->running = true;
-    this->inputLength = this->file->getFileLength();
+    this->inputLength = this->file->fileLength;
 
     while (this->running) {
         getNextToken();
@@ -125,7 +153,7 @@ void Lexer::startLexingFiles(std::vector<File> files) {
         this->file = &file;
         lexFile(this->file);
 
-        for (auto &tokens: *this->file->getTokenStream()) {
+        for (auto &tokens: *this->file->tokenStream) {
             std::cout << tokens->toString() << std::endl;
         }
     }
