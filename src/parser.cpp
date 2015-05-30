@@ -8,6 +8,11 @@ bool Parser::matchToken(std::string content, TokenType type, int ahead) {
     return token->type && token->content == content;
 }
 
+Node *Parser::pushNode(Node *n) {
+    this->file->ast->push_back(n);
+    return n;
+}
+
 Token *Parser::consumeToken() {
     Token *tok = this->file->tokenStream->at(pos);
     this->pos++;
@@ -22,22 +27,79 @@ Token *Parser::peek(int ahead) {
     return file->tokenStream->at(pos + ahead);
 }
 
-void Parser::parseFuncDecl() {
-
-}
-
-void Parser::parseDecl() {
-
-}
-
-void Parser::parseNode() {
-    Token *currentToken = peek();
-
-    switch (currentToken->content) {
-        case FUNC_KEYWORD:
-            std::cout << "it's a function!" << std::endl;
-            break;
+Type *Parser::parseType() {
+    std::string value = consumeToken()->content;
+    if (types.find(value) != types.end()) {
+        return new Type(types[value]);
     }
+    return nullptr;
+}
+
+// a : type = expr
+VarDecl *Parser::parseVarDecl() {
+    if (matchToken("", IDENTIFIER, 0)) {
+        std::string name = consumeToken()->content;
+
+        if (matchToken(":", OPERATOR, 0)) {
+            consumeToken();
+        }
+
+        Type *type = parseType();
+        if (!type) {
+            std::cerr << "invalid type" << std::endl;
+        }
+
+        VarDecl *var = new VarDecl(name, type);
+        if (matchToken("=", OPERATOR, 0)) {
+            consumeToken();
+
+            // parse expr
+            // add it on the to the *var
+        }
+
+        return var;
+    }
+
+    std::cout << "shitty var decl" << std::endl;
+    return nullptr;
+}
+
+FuncDecl *Parser::parseFuncDecl() {
+    if (matchToken(FUNC_KEYWORD, IDENTIFIER, 0)) {
+        consumeToken();
+
+        if (matchToken("", IDENTIFIER, 0)) {
+            std::string name = consumeToken()->content;
+        }
+    }
+
+    std::cout << "shitty func decl" << std::endl;
+    return nullptr;
+}
+
+Decl *Parser::parseDecl() {
+    if (peek()->content == FUNC_KEYWORD) {
+        FuncDecl *func = parseFuncDecl();
+        // todo
+        return func;
+    }
+    else if (peek(1)->type == OPERATOR && peek(1)->content == ":") {
+        VarDecl *decl = parseVarDecl();
+        return decl;
+    }
+
+    std::cout << "shitty decl" << std::endl;
+    return nullptr;
+}
+
+Node *Parser::parseNode() {
+    Decl *decl = parseDecl();
+    if (decl) {
+        return pushNode(decl);
+    }
+
+    std::cout << "shitty node" << std::endl;
+    return nullptr;
 }
 
 void Parser::parseFile(File file) {

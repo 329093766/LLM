@@ -3,39 +3,72 @@
 
 class Node {};
 
-enum Type {
+enum PrimitiveType {
     TYPE_INT,
     TYPE_DOUBLE,
     TYPE_STRING,
     TYPE_CHAR,
 };
 
-class Decl : Node {
-private:
+class Type {
 public:
+    PrimitiveType type;
+
+    Type(PrimitiveType type) {
+        this->type = type;
+    }
+};
+
+class Decl : public Node {
+public:
+    Decl() {}
+    virtual ~Decl() {}
 };
 
 class Expr {
 public:
+    Expr() {}
     virtual ~Expr();
 };
 
-class FunctionParameter {
-    std::string name;
-    Type type;
-};
-
-class FunctionDecl : Decl {
+class VarDecl : public Decl {
 public:
     std::string name;
-    std::vector<FunctionParameter> params;
+    Type *type;
+    Expr *value;
 
-    FunctionDecl(std::string name, std::vector<FunctionParameter> params) {
+    VarDecl(std::string name, Type *type) {
+        this->name = name;
+        this->type = type;
+    }
+
+    virtual ~VarDecl() { }
+};
+
+class FuncParam {
+public:
+    std::string name;
+    Type *type;
+
+    FuncParam(std::string name, Type *type) {
+        this->name = name;
+        this->type = type;
+    }
+
+    virtual ~FuncParam() {}
+};
+
+class FuncDecl : public Decl {
+public:
+    std::string name;
+    std::vector<FuncParam> params;
+
+    FuncDecl(std::string name, std::vector<FuncParam> params) {
         this->name = name;
         this->params = params;
     }
 
-    virtual ~FunctionDecl() {}
+    virtual ~FuncDecl() {}
 };
 
 #endif // __AST_HPP

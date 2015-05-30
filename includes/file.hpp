@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "logger.hpp"
+#include "ast.hpp"
 
 class File;
 
@@ -59,6 +60,8 @@ public:
 
 	/** token stream for file */
     std::vector<Token*> *tokenStream;
+
+    std::vector <Node*> *ast;
 
 	/** how long the file is */
 	int fileLength;
