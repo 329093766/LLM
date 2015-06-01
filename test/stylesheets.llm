@@ -1,8 +1,0 @@
-(head
-    (link [rel "stylesheet"] [href "test.css"] [type "text/css"])
-    (title "hello stylesheet thing!")
-)
-
-(body
-    (p "this should be red")
-)
