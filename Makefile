@@ -1,6 +1,6 @@
 SRC_FILES = $(wildcard src/*.cpp)
 CXX_FLAGS = -Iincludes/ -Wall -g -std=c++14 -lfcgi++ -lfcgi
-CXX = clang++
+CXX = ${CXX}
 
 all:
 	@mkdir -p bin/

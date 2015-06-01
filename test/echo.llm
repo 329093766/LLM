@@ -19,7 +19,7 @@
     (div [class "blog-masthead"]
         (div [class "container"]
             (nav [class "blog-nav"]
-                (a [class "blog-nav-item"] [href "#"] "Home")
+                (a [class "blog-nav-item active"] [href "#"] "Home")
                 (a [class "blog-nav-item"] [href "#"] "New Features")
                 (a [class "blog-nav-item"] [href "#"] "Press")
                 (a [class "blog-nav-item"] [href "#"] "New Hires")
