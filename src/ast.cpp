@@ -33,11 +33,27 @@ void ElementLiteral::codegen(Writer *writer) {
 }
 
 void ElementDecl::codegen(Writer *writer) {
-    writer->writeRaw("<" + tag + ">");
+    writer->writeRaw("<" + tag);
+
+    if (attributes->size() > 0) {
+        writer->writeRaw(" "); // space
+    }
+
+    for (auto &attrib : *attributes) {
+        attrib->codegen(writer);
+    }
+
+    writer->writeRaw(">");
 
     for (auto &child : *children) {
         child->codegen(writer);
     }
 
     writer->writeRaw("</" + tag + ">");
+}
+
+void ElementAttribute::codegen(Writer *writer) {
+    writer->writeRaw(attribute + "= \"");
+    child->codegen(writer);
+    writer->writeRaw("\" ");
 }

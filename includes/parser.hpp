@@ -35,6 +35,7 @@ public:
     Node *parseNode(Writer *writer);
     ElementLiteral *parseElementLiteral();
     ElementDecl *parseElementDecl();
+    ElementAttribute *parseElementAttribute();
     HTML *parseHTML();
 
     Token *consumeToken();

@@ -79,7 +79,7 @@ void Lexer::recognizeNumber() {
 void Lexer::recognizeIdentifier() {
     consumeCharacter();
 
-    while (this->currentChar == '_' || 
+    while ((this->currentChar == '_' || this->currentChar == '-') || 
           (this->currentChar >= 'a' && this->currentChar <= 'z') ||
           (this->currentChar >= 'A' && this->currentChar <= 'Z') ||
           (this->currentChar >= '0' && this->currentChar <= '9')) {

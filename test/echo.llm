@@ -1,4 +1,37 @@
+(head
+    (meta [charset "utf-8"])
+    (meta [http-equiv "X-UA-Compatible"] [content "IE=edge"])
+    (meta [name "viewport"] [content "width=device-width, initial-scale=1"])
 
-(h1 "this is my amazing webpage")
-(p "testing 123")
-(h2 "please subscribe to my utube channel thx")
+    (title "my first webpage")
+
+    (link
+        [rel "stylesheet"]
+        [href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"]
+    )
+)
+
+(body
+    (br)
+
+    (div 
+        [class "container"]
+
+        (div
+            [class "jumbotron"]
+            (h1 "Example")
+            (p "this is an example of LLM with bootstrap...")
+            (a
+                [href "//www.github.com/felixangell"]
+                [class "btn btn-primary btn-block"]
+                "so weird how this kinda works..."
+            )
+        )
+
+        (h1 "this is my webpage...")
+        (p
+            "hi there"
+            "pls enjoy"
+            "thanks")
+    )
+)

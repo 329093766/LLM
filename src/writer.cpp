@@ -1,7 +1,7 @@
 #include "writer.hpp"
 
 Writer::Writer() {
-	document = "Content-type: text/html\r\n\r\n<html><body>";
+	document = "Content-type: text/html\r\n\r\n<html>";
 }
 
 void Writer::writeDocument() {
@@ -9,7 +9,7 @@ void Writer::writeDocument() {
     FCGX_InitRequest(&request, 0, 0);
 
     // close dat html tag bby
-    document += "</body></html>";
+    document += "</html>";
 
     while (FCGX_Accept_r(&request) == 0) {
         fcgi_streambuf cin_fcgi_streambuf(request.in);

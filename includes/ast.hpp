@@ -54,22 +54,46 @@ public:
     virtual void codegen(Writer *writer);
 };
 
+class ElementAttribute {
+public:
+    std::string attribute;
+    ElementLiteral *child;
+
+    ElementAttribute(std::string attribute, ElementLiteral *child) {
+        this->attribute = attribute;
+        this->child = child;
+    }
+
+    virtual ~ElementAttribute() {
+        delete child;
+    }
+
+    virtual void codegen(Writer *writer);
+};
+
 class ElementDecl : public HTML {
 public:
     std::string tag;
     std::vector<HTML*> *children; 
+    std::vector<ElementAttribute*> *attributes;
 
     ElementDecl(std::string tag) {
         this->tag = tag;
         this->children = new std::vector<HTML*>;
+        this->attributes = new std::vector<ElementAttribute*>;
     }
 
     void appendChild(HTML *child) {
         this->children->push_back(child);
     }
 
+    void appendAttrib(ElementAttribute *attrib) {
+        this->attributes->push_back(attrib);
+    }
+
     virtual ~ElementDecl() {
         this->children->clear();
+        this->attributes->clear();
     }
 
     virtual void codegen(Writer *writer);    

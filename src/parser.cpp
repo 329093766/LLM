@@ -69,6 +69,27 @@ ElementLiteral *Parser::parseElementLiteral() {
     return new ElementLiteral(type, tok->content);
 }
 
+ElementAttribute *Parser::parseElementAttribute() {
+    if (matchToken("[", SEPARATOR, 0)) {
+        consumeToken();
+
+        if (matchToken("", IDENTIFIER, 0)) {
+            ElementAttribute *attrib = new ElementAttribute(consumeToken()->content, parseElementLiteral());
+
+            if (matchToken("]", SEPARATOR, 0)) {
+                consumeToken();
+                return attrib;
+            } else {
+                std::cerr << "no closing attribute tag thing" << std::endl;
+            }
+        } else {
+            std::cerr << "no attribute name!" << std::endl;
+        }
+    }
+
+    return nullptr;
+}
+
 ElementDecl *Parser::parseElementDecl() {
     if (matchToken("(", SEPARATOR, 0)) {
         consumeToken();
@@ -82,9 +103,13 @@ ElementDecl *Parser::parseElementDecl() {
                     break;
                 }
 
-                HTML *node = parseHTML();
-                if (node) {
-                    decl->children->push_back(node);
+                if (matchToken("[", SEPARATOR, 0)) {
+                    decl->appendAttrib(parseElementAttribute());
+                } else {
+                    HTML *node = parseHTML();
+                    if (node) {
+                        decl->appendChild(node);
+                    }
                 }
             }
 
