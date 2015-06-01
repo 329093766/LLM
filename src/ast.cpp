@@ -53,7 +53,7 @@ void ElementDecl::codegen(Writer *writer) {
 }
 
 void ElementAttribute::codegen(Writer *writer) {
-    writer->writeRaw(attribute + "= \"");
+    writer->writeRaw(attribute + "=\"");
     child->codegen(writer);
-    writer->writeRaw("\" ");
+    writer->writeRaw("\"");
 }

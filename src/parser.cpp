@@ -156,6 +156,26 @@ FuncDecl *Parser::parseFuncDecl() {
 
         if (matchToken("", IDENTIFIER, 0)) {
             std::string name = consumeToken()->content;
+            
+            if (matchToken("(", SEPARATOR, 0)) {
+                consumeToken();
+
+                while (true) {
+                    if (matchToken(")", SEPARATOR, 0)) {
+                        consumeToken();
+                        break;
+                    }
+
+                    // parse argument
+                }
+
+                if (matchToken("-", OPERATOR, 0) && matchToken(">", OPERATOR, 1)) {
+                    consumeToken();
+                    consumeToken();
+
+                    // parse return value
+                }
+            }
         }
     }
 
