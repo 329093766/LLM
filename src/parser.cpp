@@ -55,7 +55,12 @@ ElementLiteral *Parser::parseElementLiteral() {
     
     ElementLiteralType type = LIT_UNKNOWN;
     switch (tok->type) {
-        case STRING: type = LIT_STRING; break;
+        case STRING: {
+            type = LIT_STRING; 
+            // remove quotes
+            tok->content = tok->content.substr(1, tok->content.size() - 2);
+            break;
+        }
         case CHARACTER: type = LIT_CHAR; break;
         case NUMBER: type = LIT_NUMBER; break;
         default: std::cout << "shit" << std::endl; return nullptr;

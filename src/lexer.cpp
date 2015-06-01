@@ -81,7 +81,8 @@ void Lexer::recognizeIdentifier() {
 
     while (this->currentChar == '_' || 
           (this->currentChar >= 'a' && this->currentChar <= 'z') ||
-          (this->currentChar >= 'A' && this->currentChar <= 'Z')) {
+          (this->currentChar >= 'A' && this->currentChar <= 'Z') ||
+          (this->currentChar >= '0' && this->currentChar <= '9')) {
         consumeCharacter();
     }
 
