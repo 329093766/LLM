@@ -3,7 +3,7 @@ LLM is a prototype language I'm writing to replace PHP for some of my
 personal projects.
 
 # Example
-![amazing..](http://i.imgur.com/vo6T1BG.png)
+![amazing..](http://i.imgur.com/UCcafLs.png)
 
 # Building
 First you need to compile by running make:
