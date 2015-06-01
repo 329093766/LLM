@@ -179,6 +179,8 @@ public:
 	void saveBuffers();
 	void restoreBuffers();
 
+	void writeRaw(std::string str);
+
 	void writeElement(Element *element);
 	void writeDocument();
 };

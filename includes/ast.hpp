@@ -4,9 +4,11 @@
 #include <iostream>
 #include <vector>
 
+#include "writer.hpp"
+
 class Node {
 public:
-    virtual void codegen() = 0;    
+    virtual void codegen(Writer *writer) = 0;    
 };
 
 enum PrimitiveType {
@@ -29,7 +31,7 @@ class HTML : public Node {
 public:
     HTML() {}
     virtual ~HTML() {}
-    virtual void codegen() = 0;    
+    virtual void codegen(Writer *writer) = 0;    
 };
 
 enum ElementLiteralType {
@@ -49,7 +51,7 @@ public:
         this->content = content;
     }
 
-    virtual void codegen();
+    virtual void codegen(Writer *writer);
 };
 
 class ElementDecl : public HTML {
@@ -70,21 +72,21 @@ public:
         this->children->clear();
     }
 
-    virtual void codegen();    
+    virtual void codegen(Writer *writer);    
 };
 
 class Decl : public Node {
 public:
     Decl() {}
     virtual ~Decl() {}
-    virtual void codegen() = 0;    
+    virtual void codegen(Writer *writer) = 0;    
 };
 
 class Expr {
 public:
     Expr() {}
     virtual ~Expr();
-    virtual void codegen() = 0;    
+    virtual void codegen(Writer *writer) = 0;    
 };
 
 class VarDecl : public Decl {
@@ -100,7 +102,7 @@ public:
 
     virtual ~VarDecl() { }
 
-    virtual void codegen();
+    virtual void codegen(Writer *writer);
 };
 
 class FuncParam {
@@ -114,7 +116,7 @@ public:
     }
 
     virtual ~FuncParam() {}
-    virtual void codegen();
+    virtual void codegen(Writer *writer);
 };
 
 class FuncDecl : public Decl {
@@ -128,7 +130,7 @@ public:
     }
 
     virtual ~FuncDecl() {}
-    virtual void codegen();
+    virtual void codegen(Writer *writer);
 };
 
 #endif // __AST_HPP

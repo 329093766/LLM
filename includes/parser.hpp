@@ -32,7 +32,7 @@ public:
     VarDecl *parseVarDecl();
     FuncDecl *parseFuncDecl();
     Decl *parseDecl();
-    Node *parseNode();
+    Node *parseNode(Writer *writer);
     ElementLiteral *parseElementLiteral();
     ElementDecl *parseElementDecl();
     HTML *parseHTML();

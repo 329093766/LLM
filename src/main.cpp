@@ -47,25 +47,5 @@ int main(int argc, char** argv) {
 
 	files->clear();
 
-	/**
-	// output some html to CGI thing
-	writer.saveBuffers();
-
-	// test...
-	Text headerText("My first heading!");
-	HeaderElement header(1, &headerText);
-
-	Attribute attrib("style", "color: red");
-	header.addAttribute(&attrib);
-	writer.writeElement(&header);
-
-	Text paraText("This is a paragraph.");
-	ParagraphElement para(&paraText);
-	writer.writeElement(&para);
-
-	// write the document
-	writer.writeDocument();
-	*/
-
 	return 0;
 }

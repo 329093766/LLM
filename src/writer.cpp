@@ -26,6 +26,10 @@ void Writer::writeDocument() {
     std::cout << document << std::endl;
 }
 
+void Writer::writeRaw(std::string str) {
+    document += str;
+}
+
 void Writer::writeElement(Element *element) {
 	document += element->emitElement();
 }

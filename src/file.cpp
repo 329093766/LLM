@@ -25,4 +25,5 @@ File::File(std::string location) {
 
 	this->fileLength = this->contents.length();
 	this->tokenStream = new std::vector<Token*>;
+    this->ast = new std::vector<Node*>;
 }

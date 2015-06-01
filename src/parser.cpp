@@ -79,7 +79,6 @@ ElementDecl *Parser::parseElementDecl() {
 
                 HTML *node = parseHTML();
                 if (node) {
-                    std::cout << "k" << std::endl;
                     decl->children->push_back(node);
                 }
             }
@@ -147,16 +146,16 @@ Decl *Parser::parseDecl() {
     return nullptr;
 }
 
-Node *Parser::parseNode() {
+Node *Parser::parseNode(Writer *writer) {
     Decl *decl = parseDecl();
     if (decl) {
-        decl->codegen();
+        decl->codegen(writer);
         return pushNode(decl);
     }
 
     HTML *html = parseHTML();
     if (html) {
-        html->codegen();
+        html->codegen(writer);
         return pushNode(html);
     }
 
@@ -168,11 +167,17 @@ void Parser::parseFile(File file) {
     this->pos = 0;
     this->streamSize = this->file->tokenStream->size();
 
+    Writer writer;
+
+    writer.saveBuffers();
+
     while (this->pos < streamSize) {
-        parseNode();
+        parseNode(&writer);
     }
 
-    std::cout << "Parsing complete" << std::endl;
+    writer.writeDocument();
+
+    std::cout << "Complete" << std::endl;
 }
 
 void Parser::startParsingFiles(std::vector<File> *files) {
