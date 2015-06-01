@@ -1,5 +1,0 @@
-func do_something() -> void {
-    (p "do some stuff")
-}
-
-do_something();

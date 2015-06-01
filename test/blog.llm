@@ -1,4 +1,5 @@
 (head
+  # this is a comment
   (meta [charset "utf-8"])
   (meta [http-equiv "X-UA-Compatible"] [content "IE=edge"])
   (meta [name "viewport"] [content "width=device-width, initial-scale=1"])
@@ -6,56 +7,56 @@
   (title "my first webpage")
 
   (link
-      [rel "stylesheet"]
-      [href "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"]
+    [rel "stylesheet"]
+    [href "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"]
   )
   (link 
-      [rel "stylesheet"]
-      [href "//getbootstrap.com/examples/blog/blog.css"]
+    [rel "stylesheet"]
+    [href "//getbootstrap.com/examples/blog/blog.css"]
   )
 )
 
 (body
   (div [class "blog-masthead"]
-      (div [class "container"]
-          (nav [class "blog-nav"]
-              (a [class "blog-nav-item active"] [href "#"] "Home")
-              (a [class "blog-nav-item"] [href "#"] "New Features")
-              (a [class "blog-nav-item"] [href "#"] "Press")
-              (a [class "blog-nav-item"] [href "#"] "New Hires")
-          )
+    (div [class "container"]
+      (nav [class "blog-nav"]
+        (a [class "blog-nav-item active"] [href "#"] "Home")
+        (a [class "blog-nav-item"] [href "#"] "New Features")
+        (a [class "blog-nav-item"] [href "#"] "Press")
+        (a [class "blog-nav-item"] [href "#"] "New Hires")
       )
+    )
   )
 
   (div [class "container"]
-      (div [class "blog-header"]
-          (h1 [class "blog-title"] "The Bootstrap Blog")
-          (p [class "lead blog-description"]
-              "The official example template of creating a blog with bootstrap"
-          )
+    (div [class "blog-header"]
+      (h1 [class "blog-title"] "The Bootstrap Blog")
+      (p [class "lead blog-description"]
+        "The official example template of creating a blog with bootstrap"
       )
+    )
 
-      (div [class "row"]
-          (div [class "col-sm-8 blog-main"]
-              (div [class "blog-post"]
-                  (h2 [class "blog-post-title"] "Sample Blog Post")
-                  (p [class "blog-post-meta"] "January 1, 2014 by " (a [href "#"] "Mark"))
-                  (p
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis arcu massa. Fusce pharetra a velit et efficitur. Curabitur facilisis
-                      fermentum turpis quis sollicitudin. Aenean vitae volutpat diam, laoreet lacinia elit. Vivamus eros erat, euismod sit amet ultrices eu, molestie non
-                      nulla. Suspendisse ut suscipit elit. Nullam a erat id libero pellentesque dapibus vel euismod neque. Nulla eu bibendum metus. Vivamus efficitur 
-                      ultrices lobortis. Integer eu dapibus nibh, at pharetra odio."
-                  )
-
-                  (nav
-                      (ul [class "pager"]
-                          (li (a [href "#"] "Next"))
-                          (li (a [href "#"] "Previous"))
-                      )
-                  )
-              )
+    (div [class "row"]
+      (div [class "col-sm-8 blog-main"]
+        (div [class "blog-post"]
+          (h2 [class "blog-post-title"] "Sample Blog Post")
+          (p [class "blog-post-meta"] "January 1, 2014 by " (a [href "#"] "Mark"))
+          (p
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis arcu massa. Fusce pharetra a velit et efficitur. Curabitur facilisis
+              fermentum turpis quis sollicitudin. Aenean vitae volutpat diam, laoreet lacinia elit. Vivamus eros erat, euismod sit amet ultrices eu, molestie non
+              nulla. Suspendisse ut suscipit elit. Nullam a erat id libero pellentesque dapibus vel euismod neque. Nulla eu bibendum metus. Vivamus efficitur 
+              ultrices lobortis. Integer eu dapibus nibh, at pharetra odio."
           )
+
+          (nav
+            (ul [class "pager"]
+              (li (a [href "#"] "Next"))
+              (li (a [href "#"] "Previous"))
+            )
+          )
+        )
       )
+    )
   )
 
   (footer [class "blog-footer"]

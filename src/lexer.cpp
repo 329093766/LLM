@@ -89,6 +89,14 @@ void Lexer::recognizeIdentifier() {
     pushToken(TokenType::IDENTIFIER);
 }
 
+void Lexer::eatComments() {
+    do {
+        this->pos++;
+        this->currentChar = this->file->contents[this->pos];
+    }
+    while (this->currentChar != '\n');
+}
+
 void Lexer::getNextToken() {
     switch (this->currentChar) {
         case '0' ... '9':
@@ -98,6 +106,9 @@ void Lexer::getNextToken() {
         case 'A' ... 'Z':
             recognizeIdentifier();
             break;
+        case '#':
+            eatComments();
+            break;
         case '<': case '>':
         case '/': case '*':
         case '+': case '-':
@@ -105,7 +116,7 @@ void Lexer::getNextToken() {
         case '$': case '!':
         case '=': case '|':
         case '?': case '~':
-        case '#': case ':':
+        case ':':
         case ';': case '\\':
         case '.': case '&':
             recognizeOperator();

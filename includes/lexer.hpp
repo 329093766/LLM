@@ -36,6 +36,7 @@ public:
     void lexFile(File *file);
     void startLexingFiles(std::vector<File> *files);
     void pushToken(TokenType type);
+    void eatComments();
 
     virtual ~Lexer() {}
 };
