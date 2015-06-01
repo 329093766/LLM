@@ -7,31 +7,55 @@
 
     (link
         [rel "stylesheet"]
-        [href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"]
+        [href "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"]
+    )
+    (link 
+        [rel "stylesheet"]
+        [href "//getbootstrap.com/examples/blog/blog.css"]
     )
 )
 
 (body
-    (br)
+    (div [class "blog-masthead"]
+        (div [class "container"]
+            (nav [class "blog-nav"]
+                (a [class "blog-nav-item"] [href "#"] "Home")
+                (a [class "blog-nav-item"] [href "#"] "New Features")
+                (a [class "blog-nav-item"] [href "#"] "Press")
+                (a [class "blog-nav-item"] [href "#"] "New Hires")
+            )
+        )
+    )
 
-    (div 
-        [class "container"]
-
-        (div
-            [class "jumbotron"]
-            (h1 "Example")
-            (p "this is an example of LLM with bootstrap...")
-            (a
-                [href "//www.github.com/felixangell"]
-                [class "btn btn-primary btn-block"]
-                "so weird how this kinda works..."
+    (div [class "container"]
+        (div [class "blog-header"]
+            (h1 [class "blog-title"] "The Bootstrap Blog")
+            (p [class "lead blog-description"]
+                "The official example template of creating a blog with bootstrap"
             )
         )
 
-        (h1 "this is my webpage...")
-        (p
-            "hi there"
-            "pls enjoy"
-            "thanks")
+        (div [class "row"]
+            (div [class "col-sm-8 blog-main"]
+                (div [class "blog-post"]
+                    (h2 [class "blog-post-title"] "Sample Blog Post")
+                    (p [class "blog-post-meta"] "January 1, 2014 by " (a [href "#"] "Mark"))
+                    (p
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis arcu massa. Fusce pharetra a velit et efficitur. Curabitur facilisis fermentum turpis quis sollicitudin. Aenean vitae volutpat diam, laoreet lacinia elit. Vivamus eros erat, euismod sit amet ultrices eu, molestie non nulla. Suspendisse ut suscipit elit. Nullam a erat id libero pellentesque dapibus vel euismod neque. Nulla eu bibendum metus. Vivamus efficitur ultrices lobortis. Integer eu dapibus nibh, at pharetra odio."
+                    )
+
+                    (nav
+                        (ul [class "pager"]
+                            (li (a [href "#"] "Next"))
+                            (li (a [href "#"] "Previous"))
+                        )
+                    )
+                )
+            )
+        )
+    )
+
+    (footer [class "blog-footer"]
+        (p "Blog template built for " (a [href "#"] "Bootstrap") " by Person Name")
     )
 )
