@@ -1,0 +1,21 @@
+(head
+  (title "this is my title")
+
+  (style
+    [type "text/css"]
+    "h1 {
+      color: red;
+    }
+    .container h1 {
+      color: blue;
+    }
+    "
+  )
+)
+
+(body
+  (h1 "asdasd")
+  (div [class "container"] [id "id"]
+    (h1 "hello")
+  )
+)
