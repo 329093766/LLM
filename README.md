@@ -5,6 +5,7 @@ personal projects.
 # Example
 ![amazing..](http://i.imgur.com/UCcafLs.png)
 You can go and see for yourself [here](http://llm.felixangell.com/)!
+Or you can see the source code for the site [here](https://github.com/felixangell/LLM/blob/master/test/blog.llm)
 
 # Building
 First you need to compile by running make:

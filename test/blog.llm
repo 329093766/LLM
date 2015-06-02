@@ -1,5 +1,10 @@
+# this is a comment!
+# look at this comment
+# very nice
+# very good
+# nice comment yes?
+
 (head
-  # this is a comment
   (meta [charset "utf-8"])
   (meta [http-equiv "X-UA-Compatible"] [content "IE=edge"])
   (meta [name "viewport"] [content "width=device-width, initial-scale=1"])
@@ -42,10 +47,10 @@
           (h2 [class "blog-post-title"] "Sample Blog Post")
           (p [class "blog-post-meta"] "January 1, 2014 by " (a [href "#"] "Mark"))
           (p
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis arcu massa. Fusce pharetra a velit et efficitur. Curabitur facilisis
-              fermentum turpis quis sollicitudin. Aenean vitae volutpat diam, laoreet lacinia elit. Vivamus eros erat, euismod sit amet ultrices eu, molestie non
-              nulla. Suspendisse ut suscipit elit. Nullam a erat id libero pellentesque dapibus vel euismod neque. Nulla eu bibendum metus. Vivamus efficitur 
-              ultrices lobortis. Integer eu dapibus nibh, at pharetra odio."
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis arcu massa. Fusce pharetra a velit et efficitur. Curabitur facilisis
+            fermentum turpis quis sollicitudin. Aenean vitae volutpat diam, laoreet lacinia elit. Vivamus eros erat, euismod sit amet ultrices eu, molestie non
+            nulla. Suspendisse ut suscipit elit. Nullam a erat id libero pellentesque dapibus vel euismod neque. Nulla eu bibendum metus. Vivamus efficitur 
+            ultrices lobortis. Integer eu dapibus nibh, at pharetra odio."
           )
 
           (nav
