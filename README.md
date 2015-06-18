@@ -1,9 +1,10 @@
 # LLM
 LLM is a prototype language I'm writing to replace PHP for some of my
-personal projects.
+personal projects. This language is a small side-project, mostly for
+fun and learning other languages/tools!
 
 ### [**Documentation**](https://github.com/felixangell/LLM/blob/master/DOCS.md)
-You can find the documentation [**here**](https://github.com/felixangell/LLM/blob/master/DOCS.md),
+You can find the (basic) documentation [**here**](https://github.com/felixangell/LLM/blob/master/DOCS.md),
 the language is still a WIP, so not everything is described in the documentation.
 
 # Example
