@@ -41,23 +41,27 @@ You can also have elements inside of elements:
 
 ### Attributes
 
-As for attributes, those are really easy. They are denoted with square brackets, `[]`.
-For instance, you want to give your div a class? No problem:
+Attributes are denoted with square brackets, `[]`.
+For instance, you would write the following to set the 
+class attribute for a div to "classname".
 
     (div [class "classname"]
       (h1 "woo")
     )
 
-You can have multiple attributes, for instance:
+You can have multiple attributes:
 
     (div [class "classname"] [id "idname"]
 
     )
 
-However, if there are multiple attributes, it is suggested you format them like this:
+However, if there are multiple attributes, it is suggested you format them like this if it has more than one child:
 
     (div 
       [class "classname"] 
       [id "idname"]
       (p "woo")
+      (p "another child")
+      (p "yeyeye")
     )
+
